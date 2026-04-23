@@ -1,22 +1,24 @@
 <script setup lang="ts">
-const steps = [
-  { n: '01', title: "Buyurtma yuboring", desc: "Formani to'ldiring yoki bizga qo'ng'iroq qiling." },
-  { n: '02', title: "Dizaynni tasdiqlang", desc: "Biz maket tayyorlaymiz, siz tasdiqlaysiz." },
-  { n: '03', title: "Ishlab chiqarish", desc: "Zamonaviy uskunalarda sifatli bosma." },
-  { n: '04', title: "Yetkazib berish", desc: "Tayyor mahsulotni o'z vaqtida olasiz." },
-]
+const { t, tm, rt } = useI18n()
+
+interface Step { title: string; desc: string }
+const STEP_NUMBERS = ['01', '02', '03', '04']
+const steps = computed(() => {
+  const items = tm('how_it_works.steps') as Step[]
+  return items.map((s, i) => ({ title: rt(s.title), desc: rt(s.desc), n: STEP_NUMBERS[i] }))
+})
 </script>
 
 <template>
   <section class="bg-cream px-10 py-[120px]">
-    <div class="max-w-[1200px] mx-auto">
+    <div class="max-w-300 mx-auto">
       <FadeUp>
-        <SectionLabel text="Jarayon" />
+        <SectionLabel :text="t('how_it_works.label')" />
         <h2
           class="font-outfit font-extrabold text-dark mb-16"
           style="font-size: clamp(36px, 4vw, 56px); letter-spacing: -0.03em;"
         >
-          Buyurtma berish juda oson
+          {{ t('how_it_works.heading') }}
         </h2>
       </FadeUp>
 
@@ -27,16 +29,12 @@ const steps = [
           :delay="i * 100"
         >
           <div class="pr-8 pb-8 relative">
-            <!-- Connector line (hidden on last item and mobile) -->
             <div
               v-if="i < steps.length - 1"
               class="absolute top-9 right-0 h-px border-t-2 border-dashed border-accent/30 hidden lg:block"
               style="left: 60%;"
             />
-            <div
-              class="font-outfit font-extrabold text-accent leading-none mb-4 opacity-90"
-              style="font-size: 64px;"
-            >
+            <div class="font-outfit font-extrabold text-accent leading-none mb-4 opacity-90" style="font-size: 64px;">
               {{ step.n }}
             </div>
             <h3 class="font-outfit font-bold text-xl text-dark mb-2.5">{{ step.title }}</h3>

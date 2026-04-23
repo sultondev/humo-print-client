@@ -1,12 +1,11 @@
 <script setup lang="ts">
+const { t, tm, rt } = useI18n()
+const localePath = useLocalePath()
+
 const loaded = ref(false)
 onMounted(() => setTimeout(() => { loaded.value = true }, 80))
 
-const stats = [
-  { number: '500+', label: 'Mijoz' },
-  { number: '10 yil', label: 'Tajriba' },
-  { number: '1 kun', label: 'Tayyor' },
-]
+const stats = computed(() => tm('hero.stats') as { number: string; label: string }[])
 </script>
 
 <template>
@@ -14,59 +13,57 @@ const stats = [
     class="min-h-screen bg-dark flex items-center relative overflow-hidden px-10"
     style="padding-top: 120px; padding-bottom: 80px;"
   >
-    <!-- Orange glow -->
     <div
       class="absolute pointer-events-none"
       style="top: -20%; right: -10%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(232,93,38,0.12) 0%, transparent 70%);"
     />
 
-    <div class="max-w-[1200px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <div class="max-w-300 mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
       <!-- Left: Text -->
       <div
         class="transition-all duration-700 ease-out"
         :class="loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
       >
-        <SectionLabel text="Toshkent · O'zbekiston" />
+        <SectionLabel :text="t('hero.location')" />
 
         <h1
           class="font-outfit font-extrabold text-white mb-7"
           style="font-size: clamp(42px, 6vw, 80px); line-height: 1.05; letter-spacing: -0.03em;"
         >
-          Har qanday g'oyani
-          <span class="text-accent">bosma</span>
-          shaklga aylantiramiz
+          {{ t('hero.title_before') }}
+          <span class="text-accent"> {{ t('hero.title_accent') }} </span>
+          {{ t('hero.title_after') }}
         </h1>
 
         <p
           class="font-sans text-white/55 leading-relaxed mb-10 max-w-[480px]"
           style="font-size: clamp(16px, 1.5vw, 20px);"
         >
-          Vizitka, banner, souvenir, qadoqlash va boshqa — yuqori sifat, tezkor yetkazib berish.
+          {{ t('hero.desc') }}
         </p>
 
         <div class="flex gap-3.5 flex-wrap mb-12">
           <NuxtLink
-            to="/order"
+            :to="localePath('/order')"
             class="bg-accent text-white rounded-full font-sans font-bold text-base flex items-center gap-2 no-underline transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(232,93,38,0.4)]"
             style="padding: 16px 32px;"
           >
-            Buyurtma berish <span class="text-lg">→</span>
+            {{ t('hero.order_btn') }} <span class="text-lg">→</span>
           </NuxtLink>
           <NuxtLink
-            to="/portfolio"
+            :to="localePath('/portfolio')"
             class="bg-transparent text-white border border-white/25 rounded-full font-sans font-semibold text-base no-underline transition-all duration-200 hover:border-white/70"
             style="padding: 16px 32px;"
           >
-            Ishlarimizni ko'rish
+            {{ t('hero.portfolio_btn') }}
           </NuxtLink>
         </div>
 
-        <!-- Trust stats -->
         <div class="flex gap-8 flex-wrap">
           <div v-for="stat in stats" :key="stat.label">
-            <div class="font-outfit font-bold text-[22px] text-white">{{ stat.number }}</div>
-            <div class="font-sans text-[13px] text-white/40">{{ stat.label }}</div>
+            <div class="font-outfit font-bold text-[22px] text-white">{{ rt(stat.number) }}</div>
+            <div class="font-sans text-[13px] text-white/40">{{ rt(stat.label) }}</div>
           </div>
         </div>
       </div>
@@ -83,18 +80,14 @@ const stats = [
             alt="Printing products"
             class="w-full h-full object-cover block"
           />
-          <div
-            class="absolute inset-0"
-            style="background: linear-gradient(160deg, transparent 60%, rgba(15,15,15,0.5));"
-          />
-          <!-- Floating badge -->
+          <div class="absolute inset-0" style="background: linear-gradient(160deg, transparent 60%, rgba(15,15,15,0.5));" />
           <div
             class="absolute bottom-6 left-6 rounded-xl border border-white/10"
             style="background: rgba(15,15,15,0.85); backdrop-filter: blur(12px); padding: 12px 18px;"
           >
-            <div class="font-mono text-[10px] text-accent tracking-[0.1em] mb-1">YANGI BUYURTMA</div>
-            <div class="font-sans text-sm text-white font-semibold">Vizitka × 500 dona</div>
-            <div class="font-sans text-xs text-white/40">Tayyor: 1 ish kuni</div>
+            <div class="font-mono text-[10px] text-accent tracking-[0.1em] mb-1">{{ t('hero.badge_label') }}</div>
+            <div class="font-sans text-sm text-white font-semibold">{{ t('hero.badge_title') }}</div>
+            <div class="font-sans text-xs text-white/40">{{ t('hero.badge_ready') }}</div>
           </div>
         </div>
       </div>

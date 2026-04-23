@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import type { Service } from '~/data/services'
+import type { ServiceStatic } from '~/data/services'
+
+interface ServiceWithLocale extends ServiceStatic {
+  title: string
+  desc: string
+  products: string[]
+}
 
 defineProps<{
-  service: Service
+  service: ServiceWithLocale
   idx: number
 }>()
 
+const { t } = useI18n()
+const localePath = useLocalePath()
 const { el, visible } = useReveal(0.1)
 </script>
 
@@ -19,7 +27,7 @@ const { el, visible } = useReveal(0.1)
     ]"
   >
     <div
-      class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
+      class="max-w-300 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
       :style="service.reverse ? 'direction: rtl;' : ''"
     >
       <!-- Image -->
@@ -52,11 +60,11 @@ const { el, visible } = useReveal(0.1)
         </div>
 
         <NuxtLink
-          to="/order"
+          :to="localePath('/order')"
           class="inline-flex bg-accent text-white rounded-full font-sans font-semibold text-[15px] no-underline transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(232,93,38,0.35)]"
           style="padding: 14px 28px;"
         >
-          Buyurtma berish →
+          {{ t('common.order_arrow') }}
         </NuxtLink>
       </div>
     </div>

@@ -1,29 +1,21 @@
 <script setup lang="ts">
+const { t, tm, rt } = useI18n()
 const activeIdx = ref(0)
 
-const quotes = [
-  {
-    text: "PrintCraft bilan ishlash juda qulay. Vizitkalamiz 2 kunda tayyor bo'ldi, sifati a'lo darajada.",
-    name: 'Aziz Karimov',
-    role: 'GreenTech direktori',
-  },
-  {
-    text: "Katalogimizni ofset usulda chop etishdi — rang va sifat kutganimizdek chiqdi.",
-    name: 'Nilufar Rashidova',
-    role: 'MedPlus marketing menejeri',
-  },
-  {
-    text: "Har safar o'z vaqtida, sifatli va professional xizmat. Tavsiya qilaman!",
-    name: 'Jasur Toshmatov',
-    role: 'FastBuild asoschisi',
-  },
-]
+interface Quote { text: string; name: string; role: string }
+const quotes = computed(() => {
+  return (tm('testimonials.items') as Quote[]).map(q => ({
+    text: rt(q.text),
+    name: rt(q.name),
+    role: rt(q.role),
+  }))
+})
 
 let timer: ReturnType<typeof setInterval>
 
 onMounted(() => {
   timer = setInterval(() => {
-    activeIdx.value = (activeIdx.value + 1) % quotes.length
+    activeIdx.value = (activeIdx.value + 1) % quotes.value.length
   }, 5000)
 })
 
@@ -32,21 +24,21 @@ onUnmounted(() => clearInterval(timer))
 
 <template>
   <section class="bg-white px-10 py-[120px]">
-    <div class="max-w-[1200px] mx-auto">
+    <div class="max-w-300 mx-auto">
       <FadeUp>
-        <SectionLabel text="Mijozlar fikri" />
+        <SectionLabel :text="t('testimonials.label')" />
         <h2
           class="font-outfit font-extrabold text-dark mb-16"
           style="font-size: clamp(36px, 4vw, 56px); letter-spacing: -0.03em;"
         >
-          Bizga ishonishadi
+          {{ t('testimonials.heading') }}
         </h2>
       </FadeUp>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <FadeUp
           v-for="(quote, i) in quotes"
-          :key="i"
+          :key="quote.name"
           :delay="i * 80"
         >
           <div

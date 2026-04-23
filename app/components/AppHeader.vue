@@ -1,29 +1,25 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const route = useRoute()
+const localePath = useLocalePath()
 const scrolled = ref(false)
 const menuOpen = ref(false)
 
-const links = [
-  { path: '/', label: 'Bosh sahifa' },
-  { path: '/services', label: 'Xizmatlar' },
-  { path: '/portfolio', label: 'Portfolio' },
-  { path: '/contact', label: 'Aloqa' },
-]
+const links = computed(() => [
+  { path: localePath('/'), label: t('nav.home') },
+  { path: localePath('/services'), label: t('nav.services') },
+  { path: localePath('/portfolio'), label: t('nav.portfolio') },
+  { path: localePath('/contact'), label: t('nav.contact') },
+])
 
-const isActive = (path: string) =>
-  path === '/' ? route.path === '/' : route.path.startsWith(path)
+const isActive = (path: string) => route.path === path || route.path === path + '/'
 
-const handleScroll = () => {
-  scrolled.value = window.scrollY > 40
-}
+const handleScroll = () => { scrolled.value = window.scrollY > 40 }
 
 onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
-watch(menuOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
-})
-
+watch(menuOpen, (open) => { document.body.style.overflow = open ? 'hidden' : '' })
 watch(() => route.path, () => {
   menuOpen.value = false
   document.body.style.overflow = ''
@@ -55,41 +51,33 @@ watch(() => route.path, () => {
       </NuxtLink>
     </nav>
 
-    <!-- CTA + hamburger -->
+    <!-- CTA + lang switcher + hamburger -->
     <div class="flex items-center gap-4">
+      <LangSwitcher class="hidden lg:flex" />
       <NuxtLink
-        to="/order"
+        :to="localePath('/order')"
         class="hidden lg:inline-flex bg-accent text-white rounded-full px-6 py-2.5 font-sans font-semibold text-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(232,93,38,0.4)] no-underline"
       >
-        Buyurtma berish
+        {{ t('common.order_btn') }}
       </NuxtLink>
 
       <button
         class="lg:hidden flex flex-col gap-[5px] items-center justify-center p-2"
-        aria-label="Menyuni ochish"
+        aria-label="Menu"
         @click="menuOpen = !menuOpen"
       >
-        <span
-          class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center"
-          :class="menuOpen ? 'rotate-45 translate-y-[7px]' : ''"
-        />
-        <span
-          class="block w-6 h-0.5 bg-white transition-all duration-300"
-          :class="menuOpen ? 'opacity-0' : 'opacity-100'"
-        />
-        <span
-          class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center"
-          :class="menuOpen ? '-rotate-45 -translate-y-[7px]' : ''"
-        />
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" :class="menuOpen ? 'rotate-45 translate-y-[7px]' : ''" />
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300" :class="menuOpen ? 'opacity-0' : 'opacity-100'" />
+        <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" :class="menuOpen ? '-rotate-45 -translate-y-[7px]' : ''" />
       </button>
     </div>
   </header>
 
-  <!-- Mobile menu overlay -->
+  <!-- Mobile menu -->
   <div
     class="fixed inset-0 z-[999] bg-dark flex flex-col items-center justify-center gap-10 transition-transform duration-[350ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
     :class="menuOpen ? 'translate-x-0' : 'translate-x-full'"
-    aria-hidden="!menuOpen"
+    :aria-hidden="!menuOpen"
   >
     <NuxtLink
       v-for="link in links"
@@ -101,10 +89,11 @@ watch(() => route.path, () => {
       {{ link.label }}
     </NuxtLink>
     <NuxtLink
-      to="/order"
+      :to="localePath('/order')"
       class="mt-4 bg-accent text-white rounded-full px-10 py-4 font-sans font-bold text-lg no-underline"
     >
-      Buyurtma berish →
+      {{ t('common.order_btn') }} →
     </NuxtLink>
+    <LangSwitcher class="mt-4" />
   </div>
 </template>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Buyurtma berish — humoprint' })
+const { t, tm, rt } = useI18n()
+
+useSeoMeta({ title: computed(() => `${t('order.page_title')} — humoprint`) })
 
 interface OrderForm {
   name: string
@@ -31,21 +33,25 @@ const form = reactive<OrderForm>({
 const errors = reactive<FormErrors>({})
 const submitted = ref(false)
 
-const productOptions = ['Vizitka', 'Katalog', 'Banner', 'Flayer', 'Stiker', 'Krujka / Souvenir', 'Qadoqlash', 'Boshqa']
+const productOptions = computed(() => (tm('order.product_options') as string[]).map(o => rt(o)))
 
-const sidebarItems = [
-  { icon: '📞', label: 'Telefon', val: '+998 99 123 45 67' },
-  { icon: '💬', label: 'Telegram', val: '@humoprint_uz' },
-  { icon: '🕐', label: 'Ish vaqti', val: 'Du–Ju: 9:00–18:00' },
-]
+interface SidebarItem { label: string; val: string }
+const SIDEBAR_ICONS = ['📞', '💬', '🕐']
+const sidebarItems = computed(() => {
+  return (tm('order.sidebar_items') as SidebarItem[]).map((item, i) => ({
+    label: rt(item.label),
+    val: rt(item.val),
+    icon: SIDEBAR_ICONS[i],
+  }))
+})
 
 const validate = (): boolean => {
   Object.assign(errors, { name: undefined, phone: undefined, product: undefined, qty: undefined })
   let valid = true
-  if (!form.name.trim()) { errors.name = "Ismingizni kiriting"; valid = false }
-  if (!form.phone.trim()) { errors.phone = "Telefon raqamingizni kiriting"; valid = false }
-  if (!form.product) { errors.product = "Mahsulot turini tanlang"; valid = false }
-  if (!form.qty) { errors.qty = "Miqdorni kiriting"; valid = false }
+  if (!form.name.trim()) { errors.name = t('order.name_error'); valid = false }
+  if (!form.phone.trim()) { errors.phone = t('order.phone_error'); valid = false }
+  if (!form.product) { errors.product = t('order.product_error'); valid = false }
+  if (!form.qty) { errors.qty = t('order.qty_error'); valid = false }
   return valid
 }
 
@@ -69,13 +75,13 @@ const inputStyle = 'padding: 14px 16px;'
 <template>
   <div>
     <PageHero
-      label="Buyurtma"
-      title="Buyurtma berish"
-      subtitle="Formani to'ldiring — biz 30 daqiqa ichida aloqaga chiqamiz."
+      :label="t('order.label')"
+      :title="t('order.page_title')"
+      :subtitle="t('order.page_subtitle')"
     />
 
     <section class="bg-cream px-10 py-20">
-      <div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 items-start">
+      <div class="max-w-300 mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 items-start">
 
         <!-- Form card -->
         <div class="bg-white rounded-2xl shadow-[0_4px_32px_rgba(0,0,0,0.06)]" style="padding: 48px;">
@@ -83,10 +89,10 @@ const inputStyle = 'padding: 14px 16px;'
           <div v-if="submitted" class="text-center py-10">
             <div class="text-[56px] mb-5">✅</div>
             <h2 class="font-outfit font-extrabold text-[32px] text-dark mb-3" style="letter-spacing: -0.02em;">
-              Buyurtma qabul qilindi!
+              {{ t('order.success_title') }}
             </h2>
             <p class="font-sans text-base text-muted leading-relaxed">
-              Rahmat, {{ form.name }}! Biz siz bilan 30 daqiqa ichida bog'lanamiz.
+              {{ t('order.success_desc', { name: form.name }) }}
             </p>
           </div>
 
@@ -96,11 +102,11 @@ const inputStyle = 'padding: 14px 16px;'
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                  Ismingiz <span class="text-accent">*</span>
+                  {{ t('order.name_label') }} <span class="text-accent">*</span>
                 </label>
                 <input
                   v-model="form.name"
-                  placeholder="Masalan: Aziz"
+                  :placeholder="t('order.name_placeholder')"
                   :class="inputClass(errors.name)"
                   :style="inputStyle"
                 />
@@ -108,12 +114,12 @@ const inputStyle = 'padding: 14px 16px;'
               </div>
               <div>
                 <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                  Telefon raqamingiz <span class="text-accent">*</span>
+                  {{ t('order.phone_label') }} <span class="text-accent">*</span>
                 </label>
                 <input
                   v-model="form.phone"
                   type="tel"
-                  placeholder="+998 90 123 45 67"
+                  :placeholder="t('order.phone_placeholder')"
                   :class="inputClass(errors.phone)"
                   :style="inputStyle"
                 />
@@ -125,27 +131,27 @@ const inputStyle = 'padding: 14px 16px;'
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                  Mahsulot turi <span class="text-accent">*</span>
+                  {{ t('order.product_label') }} <span class="text-accent">*</span>
                 </label>
                 <select
                   v-model="form.product"
                   :class="inputClass(errors.product)"
                   :style="inputStyle"
                 >
-                  <option value="">Tanlang...</option>
+                  <option value="">{{ t('order.product_placeholder') }}</option>
                   <option v-for="opt in productOptions" :key="opt" :value="opt">{{ opt }}</option>
                 </select>
                 <p v-if="errors.product" class="font-sans text-xs text-accent mt-1">{{ errors.product }}</p>
               </div>
               <div>
                 <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                  Miqdori <span class="text-accent">*</span>
+                  {{ t('order.qty_label') }} <span class="text-accent">*</span>
                 </label>
                 <input
                   v-model="form.qty"
                   type="number"
                   min="1"
-                  placeholder="100"
+                  :placeholder="t('order.qty_placeholder')"
                   :class="inputClass(errors.qty)"
                   :style="inputStyle"
                 />
@@ -156,7 +162,7 @@ const inputStyle = 'padding: 14px 16px;'
             <!-- Date -->
             <div class="mb-5">
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                Kerakli sana <span class="font-normal text-muted">(ixtiyoriy)</span>
+                {{ t('order.date_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
               <input
                 v-model="form.date"
@@ -169,12 +175,12 @@ const inputStyle = 'padding: 14px 16px;'
             <!-- Note -->
             <div class="mb-5">
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                Qo'shimcha izoh <span class="font-normal text-muted">(ixtiyoriy)</span>
+                {{ t('order.note_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
               <textarea
                 v-model="form.note"
                 rows="4"
-                placeholder="Dizayn haqida, o'lcham yoki boshqa tafsilotlar..."
+                :placeholder="t('order.note_placeholder')"
                 :class="inputClass()"
                 :style="inputStyle + ' resize: vertical; line-height: 1.6;'"
               />
@@ -183,7 +189,7 @@ const inputStyle = 'padding: 14px 16px;'
             <!-- File upload -->
             <div class="mb-8">
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                Fayl yuklash <span class="font-normal text-muted">(ixtiyoriy)</span>
+                {{ t('order.file_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
               <label class="flex items-center gap-3 cursor-pointer border-[1.5px] border-dashed border-black/15 rounded-[10px] font-sans text-sm text-muted transition-all duration-200 hover:border-accent hover:bg-accent/[0.02]" style="padding: 14px 16px;">
                 <input
@@ -193,7 +199,7 @@ const inputStyle = 'padding: 14px 16px;'
                   @change="onFileChange"
                 />
                 <span class="text-xl">📎</span>
-                <span>{{ form.file ? form.file.name : 'Dizayn faylini yuklang (PDF, AI, JPG)' }}</span>
+                <span>{{ form.file ? form.file.name : t('order.file_placeholder') }}</span>
               </label>
             </div>
 
@@ -203,13 +209,13 @@ const inputStyle = 'padding: 14px 16px;'
               class="w-full bg-accent text-white rounded-xl font-sans font-bold text-base cursor-pointer border-none transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
               style="padding: 18px;"
             >
-              Buyurtmani yuborish →
+              {{ t('order.submit_btn') }}
             </button>
 
             <div class="flex items-center gap-2 justify-center mt-4">
               <span class="text-base">🔒</span>
               <p class="font-sans text-[13px] text-muted text-center">
-                Ma'lumotlaringiz xavfsiz. Biz 30 daqiqa ichida javob beramiz.
+                {{ t('order.privacy') }}
               </p>
             </div>
           </form>
@@ -233,9 +239,9 @@ const inputStyle = 'padding: 14px 16px;'
           </div>
 
           <div class="bg-dark rounded-2xl" style="padding: 24px;">
-            <div class="font-outfit font-bold text-[17px] text-white mb-2">Tez javob kafolati</div>
+            <div class="font-outfit font-bold text-[17px] text-white mb-2">{{ t('order.guarantee_title') }}</div>
             <p class="font-sans text-sm text-white/50 leading-relaxed">
-              Buyurtmangizni qabul qilgandan so'ng 30 daqiqa ichida mutaxassisimiz siz bilan bog'lanadi.
+              {{ t('order.guarantee_desc') }}
             </p>
           </div>
         </div>

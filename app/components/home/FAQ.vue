@@ -1,44 +1,27 @@
 <script setup lang="ts">
+const { t, tm, rt } = useI18n()
 const openIdx = ref<number | null>(null)
+
+interface FaqItem { q: string; a: string }
+const items = computed(() =>
+  (tm('faq.items') as FaqItem[]).map(item => ({ q: rt(item.q), a: rt(item.a) }))
+)
 
 const toggle = (i: number) => {
   openIdx.value = openIdx.value === i ? null : i
 }
-
-const items = [
-  {
-    q: "Minimal buyurtma miqdori qancha?",
-    a: "Raqamli bosmada minimal miqdor 1 dona, ofset bosmada esa 100 donadan boshlanadi.",
-  },
-  {
-    q: "Buyurtma qancha vaqtda tayyor bo'ladi?",
-    a: "Oddiy buyurtmalar 1–3 ish kunida, murakkab loyihalar 5–7 ish kunida tayyor bo'ladi.",
-  },
-  {
-    q: "Dizayn xizmati ham bormi?",
-    a: "Ha, professional dizaynerlarimiz maket tayyorlashdan to tayyor dizayngacha yordam beradi.",
-  },
-  {
-    q: "Yetkazib berish bormi?",
-    a: "Ha, Toshkent bo'ylab bepul yetkazib berish mavjud.",
-  },
-  {
-    q: "To'lov qanday amalga oshiriladi?",
-    a: "Naqd, karta va bank o'tkazmasi orqali to'lash mumkin.",
-  },
-]
 </script>
 
 <template>
   <section class="bg-cream px-10 py-[120px]">
     <div class="max-w-[760px] mx-auto">
       <FadeUp>
-        <SectionLabel text="Savollar" />
+        <SectionLabel :text="t('faq.label')" />
         <h2
           class="font-outfit font-extrabold text-dark mb-12"
           style="font-size: clamp(36px, 4vw, 52px); letter-spacing: -0.03em;"
         >
-          Ko'p beriladigan savollar
+          {{ t('faq.heading') }}
         </h2>
       </FadeUp>
 
