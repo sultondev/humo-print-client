@@ -1,13 +1,9 @@
-<script setup lang="ts">
-</script>
-
 <template>
-    <div class="">
-        <UHeader title="HUMO PRINT UZ" />
-         <UMain>
-           <UContainer>
-               <slot />
-           </UContainer>
-        </UMain>
-    </div>
+  <div>
+    <AppHeader />
+    <main>
+      <slot />
+    </main>
+    <AppFooter />
+  </div>
 </template>
