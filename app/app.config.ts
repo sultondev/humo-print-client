@@ -1,3 +1,1 @@
-export default defineAppConfig({
-  foo: 'bar',
-})
+export default defineAppConfig({})

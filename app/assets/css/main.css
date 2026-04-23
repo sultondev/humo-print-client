@@ -1,2 +1,45 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@theme {
+  --color-accent: #E85D26;
+  --color-dark: #0F0F0F;
+  --color-cream: #F5F0EB;
+  --color-muted: #6B6B6B;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-outfit: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after {
+  /*margin: 0;*/
+  /*padding: 0;*/
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0F0F0F;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0F0F0F; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-leave-to {
+  opacity: 0;
+}
