@@ -1,0 +1,232 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "services": "Xizmatlar",
+    "portfolio": "Portfolio",
+    "contact": "Aloqa",
+    "order": "Buyurtma"
+  },
+  "common": {
+    "order_btn": "Buyurtma berish",
+    "order_arrow": "Buyurtma berish →",
+    "see_all": "Barchasini ko'rish →",
+    "see_works": "Barcha ishlarni ko'rish →",
+    "load_more": "Ko'proq ko'rish",
+    "close": "Yopish"
+  },
+  "footer": {
+    "tagline": "Sifatli bosma — ishonchli hamkor.",
+    "pages": "Sahifalar",
+    "services": "Xizmatlar",
+    "contact": "Aloqa",
+    "copyright": "© 2026 humoprint. Barcha huquqlar himoyalangan.",
+    "contact_items": [
+      { "label": "Manzil", "val": "Toshkent sh., Yakkasaroy tumani" },
+      { "label": "Telefon", "val": "+998 99 123 45 67" },
+      { "label": "Email", "val": "info{'@'}humoprint.uz" },
+      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
+      { "label": "Ish vaqti", "val": "Du–Ju: 9:00–18:00" }
+    ]
+  },
+  "hero": {
+    "location": "Toshkent · O'zbekiston",
+    "title_before": "Har qanday g'oyani",
+    "title_accent": "bosma",
+    "title_after": "shaklga aylantiramiz",
+    "desc": "Vizitka, banner, souvenir, qadoqlash va boshqa — yuqori sifat, tezkor yetkazib berish.",
+    "order_btn": "Buyurtma berish",
+    "portfolio_btn": "Ishlarimizni ko'rish",
+    "badge_label": "YANGI BUYURTMA",
+    "badge_title": "Vizitka × 500 dona",
+    "badge_ready": "Tayyor: 1 ish kuni",
+    "stats": [
+      { "number": "500+", "label": "Mijoz" },
+      { "number": "10 yil", "label": "Tajriba" },
+      { "number": "1 kun", "label": "Tayyor" }
+    ]
+  },
+  "services": {
+    "label": "Xizmatlar",
+    "heading": "Biz nima qilamiz",
+    "page_title": "Xizmatlarimiz",
+    "page_subtitle": "Har qanday bosma ehtiyojingiz uchun professional yechimlar.",
+    "service_links": ["Ofset bosma", "Raqamli bosma", "Souvenir", "Banner", "Qadoqlash", "Dizayn"],
+    "items": [
+      {
+        "title": "Ofset bosma",
+        "desc": "Katalog, jurnal, buklet — katta tirajda sifatli bosma.",
+        "products": ["Katalog", "Jurnal", "Buklet", "Kitob", "Plakat"]
+      },
+      {
+        "title": "Raqamli bosma",
+        "desc": "Vizitka, flayer, stiker — tez va sifatli.",
+        "products": ["Vizitka", "Flayer", "Stiker", "Pochta kartasi", "Menyu"]
+      },
+      {
+        "title": "Souvenir mahsulotlar",
+        "desc": "Krujka, futbolka, qalam va boshqa brendlangan sovg'alar.",
+        "products": ["Krujka", "Futbolka", "Qalam", "Daftar", "USB flesh"]
+      },
+      {
+        "title": "Banner va tashqi reklama",
+        "desc": "Katta formatdagi bannerlar, bilbordlar, ko'cha reklamalari.",
+        "products": ["Bannerlar", "Bilbord", "Roll-up", "Vitrina", "Vывеска"]
+      },
+      {
+        "title": "Qadoqlash",
+        "desc": "Brendlangan quti, paket va maxsus qadoqlash yechimlari.",
+        "products": ["Quti", "Paket", "Lenta", "Stiker", "Maxsus forma"]
+      },
+      {
+        "title": "Dizayn xizmati",
+        "desc": "Professional grafik dizayn — logotipdan to katalogga qadar.",
+        "products": ["Logotip", "Korporativ uslub", "Reklama", "Qadoqlash dizayni", "Katalog"]
+      }
+    ]
+  },
+  "portfolio": {
+    "label": "Portfolio",
+    "heading": "So'nggi ishlarimiz",
+    "page_title": "Bizning ishlarimiz",
+    "page_subtitle": "Yuzlab mijozlar uchun yaratilgan sifatli bosma mahsulotlar.",
+    "order_similar": "Shunga o'xshash buyurtma berish",
+    "filters": ["Barchasi", "Vizitka", "Katalog", "Banner", "Souvenir", "Qadoqlash", "Stiker"],
+    "preview_filters": ["Barchasi", "Bosma", "Souvenir", "Qadoqlash", "Banner"],
+    "items": [
+      { "title": "Korporativ vizitka", "cat": "Vizitka", "desc": "100% ekologik qog'ozda yuqori sifatli ofset bosma." },
+      { "title": "Brendlangan krujka", "cat": "Souvenir", "desc": "Sublimatsiya usulida chop etilgan brendlangan krujkalar." },
+      { "title": "Moda do'koni banneri", "cat": "Banner", "desc": "3×6 metrli tashqi reklama banneri." },
+      { "title": "Mahsulot qadoqlash", "cat": "Qadoqlash", "desc": "Brendlangan karton quti, maxsus litografiya." },
+      { "title": "Yillik hisobot", "cat": "Katalog", "desc": "64 betli to'liq rangli ofset katalog." },
+      { "title": "Stiker to'plami", "cat": "Stiker", "desc": "Vinilli suv o'tkazmaydigan stikerlar." },
+      { "title": "Notarial vizitka", "cat": "Vizitka", "desc": "Zarhal bosma, premium karton." },
+      { "title": "Restoran menyu", "cat": "Katalog", "desc": "A4 laminated menyu, 24 bet." },
+      { "title": "Sovg'a quti", "cat": "Qadoqlash", "desc": "Maxsus shaklda kesib chiqarilgan sovg'a quti." },
+      { "title": "Roll-up banner", "cat": "Banner", "desc": "85×200 sm pull-up banner, alyumin konstruktsiya." },
+      { "title": "Promo futbolka", "cat": "Souvenir", "desc": "DTG texnologiyasi bilan to'g'ridan-to'g'ri bosma." },
+      { "title": "Flayer dizayni", "cat": "Stiker", "desc": "A5 o'lchamida raqamli bosma flayer." }
+    ]
+  },
+  "how_it_works": {
+    "label": "Jarayon",
+    "heading": "Buyurtma berish juda oson",
+    "steps": [
+      { "title": "Buyurtma yuboring", "desc": "Formani to'ldiring yoki bizga qo'ng'iroq qiling." },
+      { "title": "Dizaynni tasdiqlang", "desc": "Biz maket tayyorlaymiz, siz tasdiqlaysiz." },
+      { "title": "Ishlab chiqarish", "desc": "Zamonaviy uskunalarda sifatli bosma." },
+      { "title": "Yetkazib berish", "desc": "Tayyor mahsulotni o'z vaqtida olasiz." }
+    ]
+  },
+  "testimonials": {
+    "label": "Mijozlar fikri",
+    "heading": "Bizga ishonishadi",
+    "items": [
+      {
+        "text": "PrintCraft bilan ishlash juda qulay. Vizitkalamiz 2 kunda tayyor bo'ldi, sifati a'lo darajada.",
+        "name": "Aziz Karimov",
+        "role": "GreenTech direktori"
+      },
+      {
+        "text": "Katalogimizni ofset usulda chop etishdi — rang va sifat kutganimizdek chiqdi.",
+        "name": "Nilufar Rashidova",
+        "role": "MedPlus marketing menejeri"
+      },
+      {
+        "text": "Har safar o'z vaqtida, sifatli va professional xizmat. Tavsiya qilaman!",
+        "name": "Jasur Toshmatov",
+        "role": "FastBuild asoschisi"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Loyihangizni boshlashga tayyormisiz?",
+    "desc": "Bepul maslahat va narx hisob-kitobi uchun hoziroq murojaat qiling.",
+    "order_btn": "Buyurtma berish",
+    "phone": "+998 99 123 45 67"
+  },
+  "faq": {
+    "label": "Savollar",
+    "heading": "Ko'p beriladigan savollar",
+    "items": [
+      {
+        "q": "Minimal buyurtma miqdori qancha?",
+        "a": "Raqamli bosmada minimal miqdor 1 dona, ofset bosmada esa 100 donadan boshlanadi."
+      },
+      {
+        "q": "Buyurtma qancha vaqtda tayyor bo'ladi?",
+        "a": "Oddiy buyurtmalar 1–3 ish kunida, murakkab loyihalar 5–7 ish kunida tayyor bo'ladi."
+      },
+      {
+        "q": "Dizayn xizmati ham bormi?",
+        "a": "Ha, professional dizaynerlarimiz maket tayyorlashdan to tayyor dizayngacha yordam beradi."
+      },
+      {
+        "q": "Yetkazib berish bormi?",
+        "a": "Ha, Toshkent bo'ylab bepul yetkazib berish mavjud."
+      },
+      {
+        "q": "To'lov qanday amalga oshiriladi?",
+        "a": "Naqd, karta va bank o'tkazmasi orqali to'lash mumkin."
+      }
+    ]
+  },
+  "order": {
+    "label": "Buyurtma",
+    "page_title": "Buyurtma berish",
+    "page_subtitle": "Formani to'ldiring — biz 30 daqiqa ichida aloqaga chiqamiz.",
+    "name_label": "Ismingiz",
+    "name_placeholder": "Masalan: Aziz",
+    "name_error": "Ismingizni kiriting",
+    "phone_label": "Telefon raqamingiz",
+    "phone_placeholder": "+998 90 123 45 67",
+    "phone_error": "Telefon raqamingizni kiriting",
+    "product_label": "Mahsulot turi",
+    "product_placeholder": "Tanlang...",
+    "product_error": "Mahsulot turini tanlang",
+    "qty_label": "Miqdori",
+    "qty_placeholder": "100",
+    "qty_error": "Miqdorni kiriting",
+    "date_label": "Kerakli sana",
+    "optional": "(ixtiyoriy)",
+    "note_label": "Qo'shimcha izoh",
+    "note_placeholder": "Dizayn haqida, o'lcham yoki boshqa tafsilotlar...",
+    "file_label": "Fayl yuklash",
+    "file_placeholder": "Dizayn faylini yuklang (PDF, AI, JPG)",
+    "submit_btn": "Buyurtmani yuborish →",
+    "privacy": "Ma'lumotlaringiz xavfsiz. Biz 30 daqiqa ichida javob beramiz.",
+    "product_options": ["Vizitka", "Katalog", "Banner", "Flayer", "Stiker", "Krujka / Souvenir", "Qadoqlash", "Boshqa"],
+    "success_title": "Buyurtma qabul qilindi!",
+    "success_desc": "Rahmat, {name}! Biz siz bilan 30 daqiqa ichida bog'lanamiz.",
+    "guarantee_title": "Tez javob kafolati",
+    "guarantee_desc": "Buyurtmangizni qabul qilgandan so'ng 30 daqiqa ichida mutaxassisimiz siz bilan bog'lanadi.",
+    "sidebar_items": [
+      { "label": "Telefon", "val": "+998 99 123 45 67" },
+      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
+      { "label": "Ish vaqti", "val": "Du–Ju: 9:00–18:00" }
+    ]
+  },
+  "contact": {
+    "label": "Aloqa",
+    "page_title": "Biz bilan bog'laning",
+    "page_subtitle": "Savollaringiz bormi? Biz yordam berishga tayyormiz.",
+    "info_heading": "Aloqa ma'lumotlari",
+    "map_label": "Yakkasaroy tumani, Toshkent",
+    "form_heading": "Xabar yuborish",
+    "name_label": "Ismingiz",
+    "name_placeholder": "To'liq ismingiz",
+    "phone_label": "Telefon",
+    "phone_placeholder": "+998 90 123 45 67",
+    "message_label": "Xabar",
+    "message_placeholder": "Savolingizni yozing...",
+    "submit_btn": "Xabar yuborish →",
+    "success_title": "Xabaringiz yuborildi!",
+    "success_desc": "Tez orada siz bilan bog'lanamiz.",
+    "items": [
+      { "label": "Manzil", "val": "Toshkent sh., Yakkasaroy tumani, Chapanata ko'chasi, 7" },
+      { "label": "Telefon", "val": "+998 99 123 45 67" },
+      { "label": "Email", "val": "info{'@'}humoprint.uz" },
+      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
+      { "label": "Ish vaqti", "val": "Dushanba–Juma: 9:00–18:00" }
+    ]
+  }
+}

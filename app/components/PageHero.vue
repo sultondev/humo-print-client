@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <section class="bg-dark pt-[72px] pb-24 px-10">
-    <div class="max-w-[1200px] mx-auto pt-16">
+    <div class="max-w-300 mx-auto pt-16">
       <SectionLabel :text="label" />
       <h1
         class="font-outfit font-extrabold text-white tracking-tight mb-5"

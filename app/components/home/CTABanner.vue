@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { t } = useI18n()
+const localePath = useLocalePath()
+</script>
+
 <template>
   <section class="bg-dark px-10 py-[100px] relative overflow-hidden">
     <!-- Center glow -->
@@ -12,24 +17,24 @@
           class="font-outfit font-extrabold text-white mb-4"
           style="font-size: clamp(36px, 4vw, 56px); letter-spacing: -0.03em;"
         >
-          Loyihangizni boshlashga tayyormisiz?
+          {{ t('cta.heading') }}
         </h2>
         <p class="font-sans text-lg text-white/50 mb-10">
-          Bepul maslahat va narx hisob-kitobi uchun hoziroq murojaat qiling.
+          {{ t('cta.desc') }}
         </p>
         <div class="flex gap-4 justify-center items-center flex-wrap">
           <NuxtLink
-            to="/order"
+            :to="localePath('/order')"
             class="bg-accent text-white rounded-full font-sans font-bold text-[17px] no-underline transition-all duration-200 hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(232,93,38,0.4)]"
             style="padding: 18px 40px;"
           >
-            Buyurtma berish
+            {{ t('cta.order_btn') }}
           </NuxtLink>
           <a
-            href="tel:+998991234567"
+            :href="`tel:${t('cta.phone').replace(/\s/g, '')}`"
             class="font-outfit font-bold text-lg text-white no-underline flex items-center gap-2"
           >
-            <span class="text-xl">📞</span> +998 99 123 45 67
+            <span class="text-xl">📞</span> {{ t('cta.phone') }}
           </a>
         </div>
       </FadeUp>

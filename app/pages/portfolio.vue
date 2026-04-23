@@ -1,26 +1,48 @@
 <script setup lang="ts">
-import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS, type PortfolioItem } from '~/data/portfolio'
+import { PORTFOLIO_IMGS } from '~/data/portfolio'
 
-useSeoMeta({ title: 'Portfolio — humoprint' })
+const { t, tm, rt } = useI18n()
+const localePath = useLocalePath()
 
-const activeFilter = ref('Barchasi')
+useSeoMeta({ title: computed(() => `${t('portfolio.page_title')} — humoprint`) })
+
+interface PortfolioLocale { title: string; cat: string; desc: string }
+
+const allItems = computed(() => {
+  const locale = tm('portfolio.items') as PortfolioLocale[]
+  return locale.map((item, i) => ({
+    title: rt(item.title),
+    cat: rt(item.cat),
+    desc: rt(item.desc),
+    img: PORTFOLIO_IMGS[i] ?? '',
+  }))
+})
+
+const filters = computed(() => (tm('portfolio.filters') as string[]).map(f => rt(f)))
+const activeFilter = ref('')
+watch(filters, (f) => {
+  if (!activeFilter.value && f.length) activeFilter.value = f[0]
+}, { immediate: true })
+
 const shown = ref(6)
-const lightbox = ref<PortfolioItem | null>(null)
+
+interface LightboxItem { title: string; cat: string; desc: string; img: string }
+const lightbox = ref<LightboxItem | null>(null)
 
 const filtered = computed(() =>
-  activeFilter.value === 'Barchasi'
-    ? PORTFOLIO_ITEMS
-    : PORTFOLIO_ITEMS.filter(item => item.cat === activeFilter.value),
+  activeFilter.value === filters.value[0]
+    ? allItems.value
+    : allItems.value.filter(item => item.cat === activeFilter.value),
 )
 
-const visible = computed(() => filtered.value.slice(0, shown.value))
+const visibleItems = computed(() => filtered.value.slice(0, shown.value))
 
 const setFilter = (f: string) => {
   activeFilter.value = f
   shown.value = 6
 }
 
-const openLightbox = (item: PortfolioItem) => {
+const openLightbox = (item: LightboxItem) => {
   lightbox.value = item
   document.body.style.overflow = 'hidden'
 }
@@ -36,9 +58,9 @@ onUnmounted(() => { document.body.style.overflow = '' })
 <template>
   <div>
     <PageHero
-      label="Portfolio"
-      title="Bizning ishlarimiz"
-      subtitle="Yuzlab mijozlar uchun yaratilgan sifatli bosma mahsulotlar."
+      :label="t('portfolio.label')"
+      :title="t('portfolio.page_title')"
+      :subtitle="t('portfolio.page_subtitle')"
     />
 
     <!-- Sticky filter bar -->
@@ -46,9 +68,9 @@ onUnmounted(() => { document.body.style.overflow = '' })
       class="bg-white sticky z-[100] border-b border-black/[0.07]"
       style="top: 72px;"
     >
-      <div class="max-w-[1200px] mx-auto px-10 flex gap-0 overflow-x-auto">
+      <div class="max-w-300 mx-auto px-10 flex gap-0 overflow-x-auto">
         <button
-          v-for="f in PORTFOLIO_FILTERS"
+          v-for="f in filters"
           :key="f"
           class="font-sans text-sm font-medium whitespace-nowrap bg-transparent border-none cursor-pointer border-b-2 transition-colors duration-200"
           style="padding: 20px;"
@@ -65,10 +87,10 @@ onUnmounted(() => { document.body.style.overflow = '' })
 
     <!-- Grid -->
     <section class="bg-cream px-10 pt-[60px] pb-20">
-      <div class="max-w-[1200px] mx-auto">
+      <div class="max-w-300 mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <div
-            v-for="(item, i) in visible"
+            v-for="(item, i) in visibleItems"
             :key="item.title + i"
             class="cursor-pointer"
             @click="openLightbox(item)"
@@ -87,7 +109,7 @@ onUnmounted(() => { document.body.style.overflow = '' })
             style="padding: 16px 40px;"
             @click="shown += 6"
           >
-            Ko'proq ko'rish
+            {{ t('common.load_more') }}
           </button>
         </div>
       </div>
@@ -123,19 +145,19 @@ onUnmounted(() => { document.body.style.overflow = '' })
             </div>
             <div>
               <NuxtLink
-                to="/order"
+                :to="localePath('/order')"
                 class="block w-full text-center bg-accent text-white rounded-full font-sans font-semibold text-[15px] no-underline mb-3 hover:opacity-90 transition-opacity"
                 style="padding: 14px 28px;"
                 @click="closeLightbox"
               >
-                Shunga o'xshash buyurtma berish
+                {{ t('portfolio.order_similar') }}
               </NuxtLink>
               <button
                 class="w-full bg-transparent text-muted border border-[#ddd] rounded-full font-sans font-medium text-sm cursor-pointer hover:border-dark transition-colors"
                 style="padding: 12px 28px;"
                 @click="closeLightbox"
               >
-                Yopish
+                {{ t('common.close') }}
               </button>
             </div>
           </div>

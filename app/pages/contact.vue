@@ -1,18 +1,22 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Aloqa — humoprint' })
+const { t, tm, rt } = useI18n()
+
+useSeoMeta({ title: computed(() => `${t('contact.page_title')} — humoprint`) })
 
 const form = reactive({ name: '', phone: '', message: '' })
 const sent = ref(false)
 
 const onSubmit = () => { sent.value = true }
 
-const contactItems = [
-  { icon: '📍', label: 'Manzil', val: "Toshkent sh., Yakkasaroy tumani, Chapanata ko'chasi, 7" },
-  { icon: '📞', label: 'Telefon', val: '+998 99 123 45 67' },
-  { icon: '✉️', label: 'Email', val: 'info@humoprint.uz' },
-  { icon: '💬', label: 'Telegram', val: '@humoprint_uz' },
-  { icon: '🕐', label: 'Ish vaqti', val: 'Dushanba–Juma: 9:00–18:00' },
-]
+const CONTACT_ICONS = ['📍', '📞', '✉️', '💬', '🕐']
+interface ContactItem { label: string; val: string }
+const contactItems = computed(() => {
+  return (tm('contact.items') as ContactItem[]).map((item, i) => ({
+    label: rt(item.label),
+    val: rt(item.val),
+    icon: CONTACT_ICONS[i],
+  }))
+})
 
 const inputClass = 'w-full font-sans text-[15px] text-dark bg-white rounded-[10px] outline-none transition-colors duration-200 border-[1.5px] border-black/[0.12] focus:border-accent'
 const inputStyle = 'padding: 14px 16px; display: block;'
@@ -21,13 +25,13 @@ const inputStyle = 'padding: 14px 16px; display: block;'
 <template>
   <div>
     <PageHero
-      label="Aloqa"
-      title="Biz bilan bog'laning"
-      subtitle="Savollaringiz bormi? Biz yordam berishga tayyormiz."
+      :label="t('contact.label')"
+      :title="t('contact.page_title')"
+      :subtitle="t('contact.page_subtitle')"
     />
 
     <section class="bg-cream px-10 py-20">
-      <div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div class="max-w-300 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
         <!-- Contact info + map -->
         <div>
@@ -35,7 +39,7 @@ const inputStyle = 'padding: 14px 16px; display: block;'
             class="font-outfit font-extrabold text-[32px] text-dark mb-8"
             style="letter-spacing: -0.02em;"
           >
-            Aloqa ma'lumotlari
+            {{ t('contact.info_heading') }}
           </h2>
 
           <div class="flex flex-col gap-4 mb-10">
@@ -75,7 +79,7 @@ const inputStyle = 'padding: 14px 16px; display: block;'
                 />
               </div>
               <span class="font-mono text-[11px] text-muted tracking-[0.08em] uppercase mt-1">
-                Yakkasaroy tumani, Toshkent
+                {{ t('contact.map_label') }}
               </span>
             </div>
           </div>
@@ -87,45 +91,45 @@ const inputStyle = 'padding: 14px 16px; display: block;'
             class="font-outfit font-extrabold text-[28px] text-dark mb-8"
             style="letter-spacing: -0.02em;"
           >
-            Xabar yuborish
+            {{ t('contact.form_heading') }}
           </h2>
 
           <!-- Success state -->
           <div v-if="sent" class="text-center py-10">
             <div class="text-[48px] mb-4">✉️</div>
-            <h3 class="font-outfit font-extrabold text-2xl text-dark mb-2.5">Xabaringiz yuborildi!</h3>
-            <p class="font-sans text-[15px] text-muted">Tez orada siz bilan bog'lanamiz.</p>
+            <h3 class="font-outfit font-extrabold text-2xl text-dark mb-2.5">{{ t('contact.success_title') }}</h3>
+            <p class="font-sans text-[15px] text-muted">{{ t('contact.success_desc') }}</p>
           </div>
 
           <!-- Form -->
           <form v-else class="flex flex-col gap-[18px]" @submit.prevent="onSubmit">
             <div>
-              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">Ismingiz</label>
+              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">{{ t('contact.name_label') }}</label>
               <input
                 v-model="form.name"
-                placeholder="To'liq ismingiz"
+                :placeholder="t('contact.name_placeholder')"
                 required
                 :class="inputClass"
                 :style="inputStyle"
               />
             </div>
             <div>
-              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">Telefon</label>
+              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">{{ t('contact.phone_label') }}</label>
               <input
                 v-model="form.phone"
                 type="tel"
-                placeholder="+998 90 123 45 67"
+                :placeholder="t('contact.phone_placeholder')"
                 required
                 :class="inputClass"
                 :style="inputStyle"
               />
             </div>
             <div>
-              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">Xabar</label>
+              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">{{ t('contact.message_label') }}</label>
               <textarea
                 v-model="form.message"
                 rows="5"
-                placeholder="Savolingizni yozing..."
+                :placeholder="t('contact.message_placeholder')"
                 required
                 :class="inputClass"
                 :style="inputStyle + ' resize: vertical; line-height: 1.6;'"
@@ -136,7 +140,7 @@ const inputStyle = 'padding: 14px 16px; display: block;'
               class="bg-accent text-white rounded-xl font-sans font-bold text-[15px] cursor-pointer border-none mt-1 transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
               style="padding: 16px;"
             >
-              Xabar yuborish →
+              {{ t('contact.submit_btn') }}
             </button>
           </form>
         </div>

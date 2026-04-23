@@ -2,12 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
   css: ['~/assets/css/main.css'],
+
   app: {
     head: {
-      htmlAttrs: { lang: 'uz' },
-      title: 'humoprint — Sifatli bosma xizmatlari',
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
@@ -18,5 +17,26 @@ export default defineNuxtConfig({
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
+  },
+
+  i18n: {
+    compilation: {
+      strictMessage: false,
+    },
+    locales: [
+      { code: 'uz', name: "O'zbekcha", language: 'uz-UZ', file: 'uz.json' },
+      { code: 'ru', name: 'Русский', language: 'ru-RU', file: 'ru.json' },
+      { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
+    ],
+    defaultLocale: 'uz',
+    strategy: 'prefix_except_default',
+    langDir: 'locales/',
+    lazy: true,
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_locale',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+    },
   },
 })
