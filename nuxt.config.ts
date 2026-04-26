@@ -1,5 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// Fallback base URLs per environment.
+// In CI/CD, inject NUXT_PUBLIC_API_URL — this overrides everything, no code changes needed.
+const API_URLS: Record<string, string> = {
+  development: 'http://localhost:3001',
+  staging:     'https://api-staging.humoprint.uz',
+  production:  'https://api.humoprint.uz',
+}
+const _env = process.env.NODE_ENV ?? 'development'
+
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      // NUXT_PUBLIC_API_URL env var wins; falls back to per-environment default above
+      apiUrl: process.env.NUXT_PUBLIC_API_URL ?? API_URLS[_env] ?? API_URLS.development,
+      appEnv: _env,
+    },
+  },
+
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxtjs/i18n'],
@@ -18,7 +36,9 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' },
   },
-
+  devServer: {
+    port: 3002,
+  },
   i18n: {
     compilation: {
       strictMessage: false,
@@ -31,7 +51,6 @@ export default defineNuxtConfig({
     defaultLocale: 'uz',
     strategy: 'prefix_except_default',
     langDir: 'locales/',
-    lazy: true,
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_locale',
