@@ -8,7 +8,9 @@
       "Bash(sed -i \"s/info@humoprint\\\\.uz/info{'@'}humoprint.uz/g\" D:/personal/personal/clients/humo-print-client/i18n/locales/uz.json D:/personal/personal/clients/humo-print-client/i18n/locales/ru.json D:/personal/personal/clients/humo-print-client/i18n/locales/en.json)",
       "Bash(sed -i \"s/@humoprint_uz/{'@'}humoprint_uz/g\" D:/personal/personal/clients/humo-print-client/i18n/locales/uz.json D:/personal/personal/clients/humo-print-client/i18n/locales/ru.json D:/personal/personal/clients/humo-print-client/i18n/locales/en.json)",
       "Bash(xargs sed:*)",
-      "mcp__claude_ai_Figma__create_design_system_rules"
+      "mcp__claude_ai_Figma__create_design_system_rules",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({'order': d.get\\('order', {}\\), 'contact': d.get\\('contact', {}\\)}, indent=2\\)\\)\")",
+      "Bash(pnpm add:*)"
     ]
   }
 }

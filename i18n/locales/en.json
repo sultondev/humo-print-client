@@ -219,6 +219,7 @@
     "message_label": "Message",
     "message_placeholder": "Write your question...",
     "submit_btn": "Send Message →",
+    "submitting": "Sending…",
     "success_title": "Message Sent!",
     "success_desc": "We'll get back to you shortly.",
     "items": [

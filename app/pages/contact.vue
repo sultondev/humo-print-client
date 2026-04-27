@@ -1,12 +1,43 @@
 <script setup lang="ts">
+import IMask from 'imask'
+
 const { t, tm, rt } = useI18n()
 
 useSeoMeta({ title: computed(() => `${t('contact.page_title')} — humoprint`) })
 
+interface ContactBody { name: string; phone: string; message: string }
+const { execute: submitContact, pending, error: submitError } = useApiPost<unknown, ContactBody>('/api/v1/contacts')
+
 const form = reactive({ name: '', phone: '', message: '' })
 const sent = ref(false)
 
-const onSubmit = () => { sent.value = true }
+// Phone mask: +998 (XX) XXX-XX-XX
+const phoneInputRef = ref<HTMLInputElement | null>(null)
+let phoneMask: ReturnType<typeof IMask> | null = null
+
+onMounted(() => {
+  if (phoneInputRef.value) {
+    phoneMask = IMask(phoneInputRef.value, {
+      mask: '+{998} (00) 000-00-00',
+    })
+    phoneMask.on('accept', () => {
+      form.phone = phoneMask!.unmaskedValue
+    })
+  }
+})
+
+onBeforeUnmount(() => {
+  phoneMask?.destroy()
+})
+
+const onSubmit = async () => {
+  await submitContact({
+    name: form.name,
+    phone: `+998${form.phone}`,
+    message: form.message,
+  })
+  sent.value = true
+}
 
 const CONTACT_ICONS = ['📍', '📞', '✉️', '💬', '🕐']
 interface ContactItem { label: string; val: string }
@@ -116,7 +147,7 @@ const inputStyle = 'padding: 14px 16px; display: block;'
             <div>
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">{{ t('contact.phone_label') }}</label>
               <input
-                v-model="form.phone"
+                ref="phoneInputRef"
                 type="tel"
                 :placeholder="t('contact.phone_placeholder')"
                 required
@@ -135,12 +166,16 @@ const inputStyle = 'padding: 14px 16px; display: block;'
                 :style="inputStyle + ' resize: vertical; line-height: 1.6;'"
               />
             </div>
+            <p v-if="submitError" class="font-sans text-sm text-red-500">
+              {{ submitError.message }}
+            </p>
             <button
               type="submit"
-              class="bg-accent text-white rounded-xl font-sans font-bold text-[15px] cursor-pointer border-none mt-1 transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
+              :disabled="pending"
+              class="bg-accent text-white rounded-xl font-sans font-bold text-[15px] border-none mt-1 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed enabled:cursor-pointer enabled:hover:scale-[1.01] enabled:hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
               style="padding: 16px;"
             >
-              {{ t('contact.submit_btn') }}
+              {{ pending ? t('contact.submitting') : t('contact.submit_btn') }}
             </button>
           </form>
         </div>

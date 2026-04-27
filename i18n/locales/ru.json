@@ -219,6 +219,7 @@
     "message_label": "Сообщение",
     "message_placeholder": "Напишите ваш вопрос...",
     "submit_btn": "Отправить →",
+    "submitting": "Отправка…",
     "success_title": "Сообщение отправлено!",
     "success_desc": "Мы скоро свяжемся с вами.",
     "items": [
