@@ -5,11 +5,14 @@ const { t, tm, rt } = useI18n()
 
 useSeoMeta({ title: computed(() => `${t('contact.page_title')} — humoprint`) })
 
-interface ContactBody { name: string; phone: string; message: string }
-const { execute: submitContact, pending, error: submitError } = useApiPost<unknown, ContactBody>('/api/v1/contacts')
+const { apiFetch } = useApi()
+const { getVisitorId } = useFingerprint()
 
 const form = reactive({ name: '', phone: '', message: '' })
 const sent = ref(false)
+const pending = ref(false)
+const submitError = ref<string | null>(null)
+const rateLimited = ref(false)
 
 // Phone mask: +998 (XX) XXX-XX-XX
 const phoneInputRef = ref<HTMLInputElement | null>(null)
@@ -31,12 +34,31 @@ onBeforeUnmount(() => {
 })
 
 const onSubmit = async () => {
-  await submitContact({
-    name: form.name,
-    phone: `+998${form.phone}`,
-    message: form.message,
-  })
-  sent.value = true
+  pending.value = true
+  submitError.value = null
+  try {
+    const visitorId = await getVisitorId()
+    await apiFetch('/api/v1/contacts', {
+      method: 'POST',
+      headers: { 'X-Fingerprint': visitorId },
+      body: { name: form.name, phone: `+998${form.phone}`, message: form.message },
+      retry: 0,
+    })
+    sent.value = true
+  } catch (err) {
+    const parsed = parseApiError(err)
+    if (parsed.statusCode === 429) {
+      submitError.value = t('contact.error_rate_limit')
+      rateLimited.value = true
+      setTimeout(() => { rateLimited.value = false }, 60_000)
+    } else if (parsed.statusCode === 400) {
+      submitError.value = t('contact.error_generic')
+    } else {
+      submitError.value = parsed.message
+    }
+  } finally {
+    pending.value = false
+  }
 }
 
 const CONTACT_ICONS = ['📍', '📞', '✉️', '💬', '🕐']
@@ -167,11 +189,11 @@ const inputStyle = 'padding: 14px 16px; display: block;'
               />
             </div>
             <p v-if="submitError" class="font-sans text-sm text-red-500">
-              {{ submitError.message }}
+              {{ submitError }}
             </p>
             <button
               type="submit"
-              :disabled="pending"
+              :disabled="pending || rateLimited"
               class="bg-accent text-white rounded-xl font-sans font-bold text-[15px] border-none mt-1 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed enabled:cursor-pointer enabled:hover:scale-[1.01] enabled:hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
               style="padding: 16px;"
             >

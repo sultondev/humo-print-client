@@ -3,6 +3,9 @@ const { t, tm, rt } = useI18n()
 
 useSeoMeta({ title: computed(() => `${t('order.page_title')} — humoprint`) })
 
+const { apiFetch } = useApi()
+const { getVisitorId } = useFingerprint()
+
 interface OrderForm {
   name: string
   phone: string
@@ -32,6 +35,9 @@ const form = reactive<OrderForm>({
 
 const errors = reactive<FormErrors>({})
 const submitted = ref(false)
+const pending = ref(false)
+const submitError = ref<string | null>(null)
+const rateLimited = ref(false)
 
 const productOptions = computed(() => (tm('order.product_options') as string[]).map(o => rt(o)))
 
@@ -55,8 +61,41 @@ const validate = (): boolean => {
   return valid
 }
 
-const onSubmit = () => {
-  if (validate()) submitted.value = true
+const onSubmit = async () => {
+  if (!validate()) return
+  pending.value = true
+  submitError.value = null
+  try {
+    const visitorId = await getVisitorId()
+    const fd = new FormData()
+    fd.append('name', form.name)
+    fd.append('phone', form.phone)
+    fd.append('productType', form.product)
+    fd.append('quantity', form.qty)
+    if (form.date) fd.append('requiredDate', form.date)
+    if (form.note) fd.append('note', form.note)
+    if (form.file) fd.append('file', form.file)
+    await apiFetch('/api/v1/new-orders', {
+      method: 'POST',
+      headers: { 'X-Fingerprint': visitorId },
+      body: fd,
+      retry: 0,
+    })
+    submitted.value = true
+  } catch (err) {
+    const parsed = parseApiError(err)
+    if (parsed.statusCode === 429) {
+      submitError.value = t('order.error_rate_limit')
+      rateLimited.value = true
+      setTimeout(() => { rateLimited.value = false }, 60_000)
+    } else if (parsed.statusCode === 400) {
+      submitError.value = t('order.error_generic')
+    } else {
+      submitError.value = parsed.message
+    }
+  } finally {
+    pending.value = false
+  }
 }
 
 const onFileChange = (e: Event) => {
@@ -204,12 +243,16 @@ const inputStyle = 'padding: 14px 16px;'
             </div>
 
             <!-- Submit -->
+            <p v-if="submitError" class="font-sans text-sm text-red-500">
+              {{ submitError }}
+            </p>
             <button
               type="submit"
-              class="w-full bg-accent text-white rounded-xl font-sans font-bold text-base cursor-pointer border-none transition-all duration-200 hover:scale-[1.01] hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
+              :disabled="pending || rateLimited"
+              class="w-full bg-accent text-white rounded-xl font-sans font-bold text-base border-none transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed enabled:cursor-pointer enabled:hover:scale-[1.01] enabled:hover:shadow-[0_10px_28px_rgba(232,93,38,0.4)]"
               style="padding: 18px;"
             >
-              {{ t('order.submit_btn') }}
+              {{ pending ? t('order.submitting') : t('order.submit_btn') }}
             </button>
 
             <div class="flex items-center gap-2 justify-center mt-4">

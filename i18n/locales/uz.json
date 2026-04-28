@@ -193,6 +193,9 @@
     "file_label": "Fayl yuklash",
     "file_placeholder": "Dizayn faylini yuklang (PDF, AI, JPG)",
     "submit_btn": "Buyurtmani yuborish →",
+    "submitting": "Yuborilmoqda…",
+    "error_generic": "Xatolik yuz berdi. Sahifani yangilab, qayta urinib ko'ring.",
+    "error_rate_limit": "Arizangiz allaqachon qabul qilindi. Qayta yuborishdan oldin biroz kuting.",
     "privacy": "Ma'lumotlaringiz xavfsiz. Biz 30 daqiqa ichida javob beramiz.",
     "product_options": ["Vizitka", "Katalog", "Banner", "Flayer", "Stiker", "Krujka / Souvenir", "Qadoqlash", "Boshqa"],
     "success_title": "Buyurtma qabul qilindi!",
@@ -220,6 +223,8 @@
     "message_placeholder": "Savolingizni yozing...",
     "submit_btn": "Xabar yuborish →",
     "submitting": "Yuborilmoqda…",
+    "error_generic": "Xatolik yuz berdi. Sahifani yangilab, qayta urinib ko'ring.",
+    "error_rate_limit": "Arizangiz allaqachon qabul qilindi. Qayta yuborishdan oldin biroz kuting.",
     "success_title": "Xabaringiz yuborildi!",
     "success_desc": "Tez orada siz bilan bog'lanamiz.",
     "items": [

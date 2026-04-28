@@ -193,6 +193,9 @@
     "file_label": "Upload File",
     "file_placeholder": "Upload your design file (PDF, AI, JPG)",
     "submit_btn": "Submit Order →",
+    "submitting": "Submitting…",
+    "error_generic": "Something went wrong. Please refresh the page and try again.",
+    "error_rate_limit": "Your request was already received. Please wait a moment before submitting again.",
     "privacy": "Your data is safe. We respond within 30 minutes.",
     "product_options": ["Business Card", "Catalogue", "Banner", "Flyer", "Sticker", "Mug / Souvenir", "Packaging", "Other"],
     "success_title": "Order Received!",
@@ -220,6 +223,8 @@
     "message_placeholder": "Write your question...",
     "submit_btn": "Send Message →",
     "submitting": "Sending…",
+    "error_generic": "Something went wrong. Please refresh the page and try again.",
+    "error_rate_limit": "Your request was already received. Please wait a moment before submitting again.",
     "success_title": "Message Sent!",
     "success_desc": "We'll get back to you shortly.",
     "items": [
