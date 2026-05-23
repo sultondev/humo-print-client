@@ -36,6 +36,14 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' },
   },
+  vite: {
+      optimizeDeps: {
+        include: [
+          'imask',
+          '@fingerprintjs/fingerprintjs',
+        ]
+      }
+  },
   devServer: {
     port: 3009,
   },

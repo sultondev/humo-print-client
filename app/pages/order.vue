@@ -103,6 +103,32 @@ const onFileChange = (e: Event) => {
   form.file = input.files?.[0] ?? null
 }
 
+// Promo code (client-side demo only)
+const promoCode = ref('')
+const promoStatus = ref<null | 'valid' | 'invalid'>(null)
+const promoDiscount = ref(0)
+
+const PROMO_CODES: Record<string, number> = {
+  'HUMO10': 10,
+  'YANGI15': 15,
+  'TOSHKENT20': 20,
+}
+
+const applyPromo = () => {
+  const code = promoCode.value.trim().toUpperCase()
+  if (!code) { promoStatus.value = null; return }
+  const discount = PROMO_CODES[code]
+  if (discount) {
+    promoStatus.value = 'valid'
+    promoDiscount.value = discount
+  } else {
+    promoStatus.value = 'invalid'
+    promoDiscount.value = 0
+  }
+}
+
+watch(promoCode, () => { promoStatus.value = null })
+
 const inputClass = (hasError?: string) =>
   `w-full font-sans text-[15px] text-dark bg-white rounded-[10px] outline-none transition-colors duration-200 border-[1.5px] ${
     hasError ? 'border-accent' : 'border-black/[0.12] focus:border-accent'
@@ -223,6 +249,45 @@ const inputStyle = 'padding: 14px 16px;'
                 :class="inputClass()"
                 :style="inputStyle + ' resize: vertical; line-height: 1.6;'"
               />
+            </div>
+
+            <!-- Promo code -->
+            <div class="mb-5">
+              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
+                {{ t('order.promo_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
+              </label>
+              <div class="flex gap-2">
+                <input
+                  v-model="promoCode"
+                  :placeholder="t('order.promo_placeholder')"
+                  class="flex-1 font-mono text-[15px] text-dark bg-white rounded-[10px] outline-none transition-colors duration-200 border-[1.5px] uppercase tracking-[0.05em]"
+                  :class="promoStatus === 'invalid' ? 'border-accent' : 'border-black/[0.12] focus:border-accent'"
+                  style="padding: 14px 16px;"
+                  @keyup.enter="applyPromo"
+                />
+                <button
+                  type="button"
+                  @click="applyPromo"
+                  class="rounded-[10px] font-sans font-semibold text-sm border-none transition-colors duration-200 whitespace-nowrap"
+                  :class="promoCode.trim() ? 'bg-dark text-white cursor-pointer' : 'bg-black/[0.08] text-muted cursor-not-allowed'"
+                  style="padding: 0 22px;"
+                >
+                  {{ t('order.promo_apply') }}
+                </button>
+              </div>
+              <div
+                v-if="promoStatus === 'valid'"
+                class="mt-2 flex items-center gap-2 rounded-lg"
+                style="padding: 10px 12px; background: rgba(34,197,94,0.1);"
+              >
+                <span class="text-sm">✅</span>
+                <span class="font-sans text-[13px] font-semibold" style="color: #16A34A;">
+                  {{ t('order.promo_valid', { discount: promoDiscount }) }}
+                </span>
+              </div>
+              <p v-if="promoStatus === 'invalid'" class="font-sans text-xs text-accent mt-1">
+                {{ t('order.promo_invalid') }}
+              </p>
             </div>
 
             <!-- File upload -->
