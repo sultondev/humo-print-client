@@ -112,29 +112,25 @@ const inputStyle = 'padding: 14px 16px; display: block;'
             </div>
           </div>
 
-          <!-- Map placeholder -->
-          <div
-            class="rounded-2xl overflow-hidden relative border border-black/[0.08] flex items-center justify-center flex-col"
-            style="height: 240px; background: #e8e4df;"
-          >
-            <div
-              class="absolute inset-0"
-              style="background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 12px); background-size: 17px 17px;"
+          <!-- Yandex Map -->
+          <div class="rounded-2xl overflow-hidden relative border border-black/[0.08]" style="height: 280px;">
+            <iframe
+              src="https://yandex.uz/map-widget/v1/?ll=69.202688%2C41.279343&z=16&pt=69.202688%2C41.279343%2Cpm2rdm&l=map"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              allowfullscreen
+              style="display: block;"
             />
-            <div class="relative flex flex-col items-center gap-2">
-              <div
-                class="w-9 h-9 bg-accent flex items-center justify-center"
-                style="border-radius: 50% 50% 50% 0; transform: rotate(-45deg);"
-              >
-                <div
-                  class="w-2.5 h-2.5 rounded-full bg-white"
-                  style="transform: rotate(45deg);"
-                />
-              </div>
-              <span class="font-mono text-[11px] text-muted tracking-[0.08em] uppercase mt-1">
-                {{ t('contact.map_label') }}
-              </span>
-            </div>
+            <a
+              href="https://yandex.uz/maps/-/CPdVvIMV"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="absolute bottom-3 right-3 bg-white rounded-lg font-mono text-[11px] text-accent tracking-[0.05em] uppercase shadow-[0_2px_8px_rgba(0,0,0,0.12)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.18)] transition-all duration-200"
+              style="padding: 6px 12px;"
+            >
+              {{ t('contact.map_open') }}
+            </a>
           </div>
         </div>
 

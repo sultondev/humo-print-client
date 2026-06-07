@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     locales: [
       { code: 'uz', name: "O'zbekcha", language: 'uz-UZ', file: 'uz.json' },
       { code: 'ru', name: 'Русский', language: 'ru-RU', file: 'ru.json' },
-      { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
+      // { code: 'en', name: 'English', language: 'en-US', file: 'en.json' },
     ],
     defaultLocale: 'uz',
     strategy: 'prefix_except_default',
