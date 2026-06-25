@@ -22,11 +22,26 @@
     "contact": "Contact",
     "copyright": "© 2026 humoprint. All rights reserved.",
     "contact_items": [
-      { "label": "Address", "val": "Tashkent, Yakkasaroy district" },
-      { "label": "Phone", "val": "+998 99 123 45 67" },
-      { "label": "Email", "val": "info{'@'}humoprint.uz" },
-      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
-      { "label": "Hours", "val": "Mon–Fri: 9:00–18:00" }
+      {
+        "label": "Address",
+        "val": "Tashkent, Chilanzar district, block C, 1A/1"
+      },
+      {
+        "label": "Phone",
+        "val": "+998 99 976 22 00"
+      },
+      {
+        "label": "Email",
+        "val": "info{'@'}humoprint.uz"
+      },
+      {
+        "label": "Telegram",
+        "val": "{'@'}doston1717"
+      },
+      {
+        "label": "Hours",
+        "val": "Mon–Fri: 9:00–18:00"
+      }
     ]
   },
   "hero": {
@@ -41,9 +56,18 @@
     "badge_title": "Business Cards × 500 pcs",
     "badge_ready": "Ready: 1 business day",
     "stats": [
-      { "number": "500+", "label": "Clients" },
-      { "number": "10 yrs", "label": "Experience" },
-      { "number": "1 day", "label": "Turnaround" }
+      {
+        "number": "500+",
+        "label": "Clients"
+      },
+      {
+        "number": "10 yrs",
+        "label": "Experience"
+      },
+      {
+        "number": "1 day",
+        "label": "Turnaround"
+      }
     ]
   },
   "services": {
@@ -51,37 +75,80 @@
     "heading": "What We Do",
     "page_title": "Our Services",
     "page_subtitle": "Professional printing solutions for every need.",
-    "service_links": ["Offset Printing", "Digital Printing", "Souvenirs", "Banners", "Packaging", "Design"],
+    "service_links": [
+      "Offset Printing",
+      "Digital Printing",
+      "Souvenirs",
+      "Banners",
+      "Packaging",
+      "Design"
+    ],
     "items": [
       {
         "title": "Offset Printing",
         "desc": "Catalogues, magazines, brochures — high-quality large-run printing.",
-        "products": ["Catalogue", "Magazine", "Brochure", "Book", "Poster"]
+        "products": [
+          "Catalogue",
+          "Magazine",
+          "Brochure",
+          "Book",
+          "Poster"
+        ]
       },
       {
         "title": "Digital Printing",
         "desc": "Business cards, flyers, stickers — fast and quality.",
-        "products": ["Business Card", "Flyer", "Sticker", "Postcard", "Menu"]
+        "products": [
+          "Business Card",
+          "Flyer",
+          "Sticker",
+          "Postcard",
+          "Menu"
+        ]
       },
       {
         "title": "Souvenir Products",
         "desc": "Mugs, T-shirts, pens and other branded gifts.",
-        "products": ["Mug", "T-shirt", "Pen", "Notebook", "USB Flash"]
+        "products": [
+          "Mug",
+          "T-shirt",
+          "Pen",
+          "Notebook",
+          "USB Flash"
+        ]
       },
       {
         "title": "Banners & Outdoor Advertising",
         "desc": "Large-format printing, billboards, street advertising.",
-        "products": ["Banners", "Billboard", "Roll-up", "Storefront", "Signage"]
+        "products": [
+          "Banners",
+          "Billboard",
+          "Roll-up",
+          "Storefront",
+          "Signage"
+        ]
       },
       {
         "title": "Packaging",
         "desc": "Branded boxes, bags and custom packaging solutions.",
-        "products": ["Box", "Bag", "Ribbon", "Sticker", "Custom Shape"]
+        "products": [
+          "Box",
+          "Bag",
+          "Ribbon",
+          "Sticker",
+          "Custom Shape"
+        ]
       },
       {
         "title": "Design Services",
         "desc": "Professional graphic design — from logo to full catalogue.",
-        "products": ["Logo", "Brand Identity", "Advertising", "Package Design", "Catalogue"]
+        "products": [
+          "Logo",
+          "Brand Identity",
+          "Advertising",
+          "Package Design",
+          "Catalogue"
+        ]
       }
     ]
   },
@@ -91,31 +158,105 @@
     "page_title": "Our Work",
     "page_subtitle": "Quality print products for hundreds of clients.",
     "order_similar": "Order Something Similar",
-    "filters": ["All", "Business Cards", "Catalogue", "Banner", "Souvenirs", "Packaging", "Stickers"],
-    "preview_filters": ["All", "Print", "Souvenirs", "Packaging", "Banner"],
+    "filters": [
+      "All",
+      "Business Cards",
+      "Catalogue",
+      "Banner",
+      "Souvenirs",
+      "Packaging",
+      "Stickers"
+    ],
+    "preview_filters": [
+      "All",
+      "Business Cards",
+      "Souvenirs",
+      "Banner",
+      "Packaging"
+    ],
     "items": [
-      { "title": "Corporate Business Cards", "cat": "Business Cards", "desc": "High-quality offset printing on 100% eco paper." },
-      { "title": "Branded Mug", "cat": "Souvenirs", "desc": "Branded mugs with sublimation printing." },
-      { "title": "Fashion Store Banner", "cat": "Banner", "desc": "3×6 m outdoor advertising banner." },
-      { "title": "Product Packaging", "cat": "Packaging", "desc": "Branded cardboard box with custom lithography." },
-      { "title": "Annual Report", "cat": "Catalogue", "desc": "64-page full-colour offset catalogue." },
-      { "title": "Sticker Set", "cat": "Stickers", "desc": "Vinyl waterproof stickers." },
-      { "title": "Notary Business Card", "cat": "Business Cards", "desc": "Gold foil printing, premium card stock." },
-      { "title": "Restaurant Menu", "cat": "Catalogue", "desc": "A4 laminated menu, 24 pages." },
-      { "title": "Gift Box", "cat": "Packaging", "desc": "Custom die-cut gift box." },
-      { "title": "Roll-Up Banner", "cat": "Banner", "desc": "85×200 cm pull-up banner, aluminium base." },
-      { "title": "Promo T-Shirt", "cat": "Souvenirs", "desc": "Direct-to-garment DTG printing." },
-      { "title": "Flyer Design", "cat": "Stickers", "desc": "A5 digital-print flyer." }
+      {
+        "title": "Corporate Business Cards",
+        "cat": "Business Cards",
+        "desc": "High-quality offset printing on 100% eco paper."
+      },
+      {
+        "title": "Branded Mug",
+        "cat": "Souvenirs",
+        "desc": "Branded mugs with sublimation printing."
+      },
+      {
+        "title": "Fashion Store Banner",
+        "cat": "Banner",
+        "desc": "3×6 m outdoor advertising banner."
+      },
+      {
+        "title": "Product Packaging",
+        "cat": "Packaging",
+        "desc": "Branded cardboard box with custom lithography."
+      },
+      {
+        "title": "Annual Report",
+        "cat": "Catalogue",
+        "desc": "64-page full-colour offset catalogue."
+      },
+      {
+        "title": "Sticker Set",
+        "cat": "Stickers",
+        "desc": "Vinyl waterproof stickers."
+      },
+      {
+        "title": "Notary Business Card",
+        "cat": "Business Cards",
+        "desc": "Gold foil printing, premium card stock."
+      },
+      {
+        "title": "Restaurant Menu",
+        "cat": "Catalogue",
+        "desc": "A4 laminated menu, 24 pages."
+      },
+      {
+        "title": "Gift Box",
+        "cat": "Packaging",
+        "desc": "Custom die-cut gift box."
+      },
+      {
+        "title": "Roll-Up Banner",
+        "cat": "Banner",
+        "desc": "85×200 cm pull-up banner, aluminium base."
+      },
+      {
+        "title": "Promo T-Shirt",
+        "cat": "Souvenirs",
+        "desc": "Direct-to-garment DTG printing."
+      },
+      {
+        "title": "Flyer Design",
+        "cat": "Stickers",
+        "desc": "A5 digital-print flyer."
+      }
     ]
   },
   "how_it_works": {
     "label": "Process",
     "heading": "Ordering is easy",
     "steps": [
-      { "title": "Submit Your Order", "desc": "Fill out the form or give us a call." },
-      { "title": "Approve the Design", "desc": "We prepare a mockup — you approve it." },
-      { "title": "Production", "desc": "Quality printing on state-of-the-art equipment." },
-      { "title": "Delivery", "desc": "Receive your finished product on time." }
+      {
+        "title": "Submit Your Order",
+        "desc": "Fill out the form or give us a call."
+      },
+      {
+        "title": "Approve the Design",
+        "desc": "We prepare a mockup — you approve it."
+      },
+      {
+        "title": "Production",
+        "desc": "Quality printing on state-of-the-art equipment."
+      },
+      {
+        "title": "Delivery",
+        "desc": "Receive your finished product on time."
+      }
     ]
   },
   "testimonials": {
@@ -143,7 +284,7 @@
     "heading": "Ready to start your project?",
     "desc": "Contact us now for a free consultation and price estimate.",
     "order_btn": "Place Order",
-    "phone": "+998 99 123 45 67"
+    "phone": "+998 99 976 22 00"
   },
   "faq": {
     "label": "FAQ",
@@ -198,15 +339,33 @@
     "error_generic": "Something went wrong. Please refresh the page and try again.",
     "error_rate_limit": "Your request was already received. Please wait a moment before submitting again.",
     "privacy": "Your data is safe. We respond within 30 minutes.",
-    "product_options": ["Business Card", "Catalogue", "Banner", "Flyer", "Sticker", "Mug / Souvenir", "Packaging", "Other"],
+    "product_options": [
+      "Business Card",
+      "Catalogue",
+      "Banner",
+      "Flyer",
+      "Sticker",
+      "Mug / Souvenir",
+      "Packaging",
+      "Other"
+    ],
     "success_title": "Order Received!",
     "success_desc": "Thank you, {name}! We will contact you within 30 minutes.",
     "guarantee_title": "Fast Response Guarantee",
     "guarantee_desc": "After receiving your order, our specialist will contact you within 30 minutes.",
     "sidebar_items": [
-      { "label": "Phone", "val": "+998 99 123 45 67" },
-      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
-      { "label": "Hours", "val": "Mon–Fri: 9:00–18:00" }
+      {
+        "label": "Phone",
+        "val": "+998 99 976 22 00"
+      },
+      {
+        "label": "Telegram",
+        "val": "{'@'}doston1717"
+      },
+      {
+        "label": "Hours",
+        "val": "Mon–Fri: 9:00–18:00"
+      }
     ],
     "promo_label": "Promo Code",
     "promo_placeholder": "E.g.: HUMO10",
@@ -249,7 +408,8 @@
     "page_title": "Get in Touch",
     "page_subtitle": "Have questions? We're ready to help.",
     "info_heading": "Contact Information",
-    "map_label": "Yakkasaroy district, Tashkent",
+    "map_label": "Chilanzar district, Tashkent",
+    "map_open": "Open in Yandex Maps",
     "form_heading": "Send a Message",
     "name_label": "Your Name",
     "name_placeholder": "Full name",
@@ -264,11 +424,26 @@
     "success_title": "Message Sent!",
     "success_desc": "We'll get back to you shortly.",
     "items": [
-      { "label": "Address", "val": "Tashkent, Yakkasaroy district, Chapanata st., 7" },
-      { "label": "Phone", "val": "+998 99 123 45 67" },
-      { "label": "Email", "val": "info{'@'}humoprint.uz" },
-      { "label": "Telegram", "val": "{'@'}humoprint_uz" },
-      { "label": "Hours", "val": "Monday–Friday: 9:00–18:00" }
+      {
+        "label": "Address",
+        "val": "Tashkent, Chilanzar district, block C, 1A/1"
+      },
+      {
+        "label": "Phone",
+        "val": "+998 99 976 22 00"
+      },
+      {
+        "label": "Email",
+        "val": "info{'@'}humoprint.uz"
+      },
+      {
+        "label": "Telegram",
+        "val": "{'@'}doston1717"
+      },
+      {
+        "label": "Hours",
+        "val": "Monday–Friday: 9:00–18:00"
+      }
     ]
   }
 }

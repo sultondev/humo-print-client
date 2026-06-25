@@ -23,7 +23,13 @@ const allItems = computed(() => {
   }))
 })
 
-const preview = computed(() => allItems.value.slice(0, 6))
+const preview = computed(() => {
+  const allFilter = filters.value[0]
+  if (!activeFilter.value || activeFilter.value === allFilter) {
+    return allItems.value.slice(0, 6)
+  }
+  return allItems.value.filter(item => item.cat === activeFilter.value)
+})
 
 watch(filters, (f) => {
   if (!activeFilter.value && f.length) activeFilter.value = f[0]

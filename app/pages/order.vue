@@ -256,7 +256,7 @@ const inputStyle = 'padding: 14px 16px;'
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
                 {{ t('order.promo_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
-              <div class="flex gap-2">
+              <div class="flex gap-2 xl:flex-row flex-col">
                 <input
                   v-model="promoCode"
                   :placeholder="t('order.promo_placeholder')"
@@ -268,9 +268,8 @@ const inputStyle = 'padding: 14px 16px;'
                 <button
                   type="button"
                   @click="applyPromo"
-                  class="rounded-[10px] font-sans font-semibold text-sm border-none transition-colors duration-200 whitespace-nowrap"
+                  class="rounded-[10px] xl:py-0 py-4 xl:px-6 font-sans font-semibold text-sm border-none transition-colors duration-200 whitespace-nowrap"
                   :class="promoCode.trim() ? 'bg-dark text-white cursor-pointer' : 'bg-black/[0.08] text-muted cursor-not-allowed'"
-                  style="padding: 0 22px;"
                 >
                   {{ t('order.promo_apply') }}
                 </button>

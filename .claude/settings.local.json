@@ -11,7 +11,14 @@
       "mcp__claude_ai_Figma__create_design_system_rules",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({'order': d.get\\('order', {}\\), 'contact': d.get\\('contact', {}\\)}, indent=2\\)\\)\")",
       "Bash(pnpm add:*)",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(sed -n '210,220p' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/uz.json)",
+      "Bash(sed -n '210,220p' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/ru.json)",
+      "Bash(sed -n '210,220p' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/en.json)",
+      "Bash(perl -i -pe 's/\"map_label\": \"Yakkasaroy tumani, Toshkent\",\\\\\\\\n    \"map_open\": \"Yandex Xaritada ochish\",/\"map_label\": \"Yakkasaroy tumani, Toshkent\",\\\\n    \"map_open\": \"Yandex Xaritada ochish\",/' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/uz.json)",
+      "Bash(perl -i -pe 's/\"map_label\": \"Яккасарайский район, Ташкент\",\\\\\\\\n    \"map_open\": \"Открыть в Яндекс.Картах\",/\"map_label\": \"Яккасарайский район, Ташкент\",\\\\n    \"map_open\": \"Открыть в Яндекс.Картах\",/' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/ru.json)",
+      "Bash(perl -i -pe 's/\"map_label\": \"Yakkasaroy district, Tashkent\",\\\\\\\\n    \"map_open\": \"Open in Yandex Maps\",/\"map_label\": \"Yakkasaroy district, Tashkent\",\\\\n    \"map_open\": \"Open in Yandex Maps\",/' /Users/macbook/D/work/clients/humo-print-client/i18n/locales/en.json)",
+      "Bash(python3 *)"
     ]
   }
 }
