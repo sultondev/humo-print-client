@@ -329,6 +329,7 @@
     "qty_placeholder": "100",
     "qty_error": "Please enter a quantity",
     "date_label": "Required Date",
+    "date_placeholder": "Select a date",
     "optional": "(optional)",
     "note_label": "Additional Notes",
     "note_placeholder": "About design, size or other details...",
@@ -367,6 +368,7 @@
         "val": "Mon–Fri: 9:00–18:00"
       }
     ],
+    "promo_coming_soon": "Coming Soon",
     "promo_label": "Promo Code",
     "promo_placeholder": "E.g.: HUMO10",
     "promo_apply": "Apply",

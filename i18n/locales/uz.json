@@ -329,6 +329,7 @@
     "qty_placeholder": "100",
     "qty_error": "Miqdorni kiriting",
     "date_label": "Kerakli sana",
+    "date_placeholder": "Sanani tanlang",
     "optional": "(ixtiyoriy)",
     "note_label": "Qo'shimcha izoh",
     "note_placeholder": "Dizayn haqida, o'lcham yoki boshqa tafsilotlar...",
@@ -367,6 +368,7 @@
         "val": "Du–Ju: 9:00–18:00"
       }
     ],
+    "promo_coming_soon": "Tez kunda",
     "promo_label": "Promo-kod",
     "promo_placeholder": "Masalan: HUMO10",
     "promo_apply": "Qo'llash",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t, tm, rt } = useI18n()
+const { t, tm, rt, locale } = useI18n()
 
 useSeoMeta({ title: computed(() => `${t('order.page_title')} — humoprint`) })
 
@@ -39,7 +39,17 @@ const pending = ref(false)
 const submitError = ref<string | null>(null)
 const rateLimited = ref(false)
 
-const productOptions = computed(() => (tm('order.product_options') as string[]).map(o => rt(o)))
+const PRODUCT_ICONS = ['💳', '📖', '🚩', '📃', '⭐', '☕', '📦', '✨']
+const PRODUCT_DESCS: Record<string, string> = {
+  uz: ['Korporativ va shaxsiy', 'Buklet, jurnal, kitob', 'Tashqi reklama', 'Reklama varaqalar', 'Brendlangan stikerlar', "Brendlangan sovg'alar", 'Quti, paket, maxsus forma', 'Boshqa bosma xizmatlar'],
+  ru: ['Корпоративные и личные', 'Буклет, журнал, книга', 'Наружная реклама', 'Рекламные листовки', 'Брендированные стикеры', 'Брендированные сувениры', 'Коробки, пакеты, упаковка', 'Другие услуги печати'],
+  en: ['Corporate & personal', 'Booklet, magazine, book', 'Outdoor advertising', 'Promotional flyers', 'Branded stickers', 'Branded souvenirs', 'Box, bag, custom packaging', 'Other print services'],
+}
+const productOptions = computed(() => {
+  const labels = (tm('order.product_options') as string[]).map(o => rt(o))
+  const descs = PRODUCT_DESCS[locale.value] ?? PRODUCT_DESCS.en
+  return labels.map((label, i) => ({ value: label, label, icon: PRODUCT_ICONS[i], desc: descs[i] }))
+})
 
 interface SidebarItem { label: string; val: string }
 const SIDEBAR_ICONS = ['📞', '💬', '🕐']
@@ -198,14 +208,12 @@ const inputStyle = 'padding: 14px 16px;'
                 <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
                   {{ t('order.product_label') }} <span class="text-accent">*</span>
                 </label>
-                <select
+                <BaseDropdown
                   v-model="form.product"
-                  :class="inputClass(errors.product)"
-                  :style="inputStyle"
-                >
-                  <option value="">{{ t('order.product_placeholder') }}</option>
-                  <option v-for="opt in productOptions" :key="opt" :value="opt">{{ opt }}</option>
-                </select>
+                  :options="productOptions"
+                  :placeholder="t('order.product_placeholder')"
+                  :error="!!errors.product"
+                />
                 <p v-if="errors.product" class="font-sans text-xs text-accent mt-1">{{ errors.product }}</p>
               </div>
               <div>
@@ -229,11 +237,9 @@ const inputStyle = 'padding: 14px 16px;'
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
                 {{ t('order.date_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
-              <input
+              <BaseDatePicker
                 v-model="form.date"
-                type="date"
-                :class="inputClass()"
-                :style="inputStyle"
+                :placeholder="t('order.date_placeholder')"
               />
             </div>
 
@@ -251,46 +257,39 @@ const inputStyle = 'padding: 14px 16px;'
               />
             </div>
 
-            <!-- Promo code -->
-            <div class="mb-5">
-              <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
-                {{ t('order.promo_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
-              </label>
-              <div class="flex gap-2 xl:flex-row flex-col">
-                <input
-                  v-model="promoCode"
-                  :placeholder="t('order.promo_placeholder')"
-                  class="flex-1 font-mono text-[15px] text-dark bg-white rounded-[10px] outline-none transition-colors duration-200 border-[1.5px] uppercase tracking-[0.05em]"
-                  :class="promoStatus === 'invalid' ? 'border-accent' : 'border-black/[0.12] focus:border-accent'"
-                  style="padding: 14px 16px;"
-                  @keyup.enter="applyPromo"
-                />
-                <button
-                  type="button"
-                  @click="applyPromo"
-                  class="rounded-[10px] xl:py-0 py-4 xl:px-6 font-sans font-semibold text-sm border-none transition-colors duration-200 whitespace-nowrap"
-                  :class="promoCode.trim() ? 'bg-dark text-white cursor-pointer' : 'bg-black/[0.08] text-muted cursor-not-allowed'"
-                >
-                  {{ t('order.promo_apply') }}
-                </button>
-              </div>
-              <div
-                v-if="promoStatus === 'valid'"
-                class="mt-2 flex items-center gap-2 rounded-lg"
-                style="padding: 10px 12px; background: rgba(34,197,94,0.1);"
-              >
-                <span class="text-sm">✅</span>
-                <span class="font-sans text-[13px] font-semibold" style="color: #16A34A;">
-                  {{ t('order.promo_valid', { discount: promoDiscount }) }}
+            <!-- Promo code (coming soon) -->
+            <div class="mb-5 relative">
+              <!-- Overlay -->
+              <div class="absolute inset-0 rounded-xl z-10 flex items-center justify-center" style="backdrop-filter: blur(3px); background: rgba(245,240,235,0.55);">
+                <span class="font-mono text-[11px] tracking-[0.15em] uppercase font-semibold px-3 py-1.5 rounded-full border" style="color: #E85D26; border-color: rgba(232,93,38,0.3); background: rgba(232,93,38,0.06);">
+                  {{ t('order.promo_coming_soon') }}
                 </span>
               </div>
-              <p v-if="promoStatus === 'invalid'" class="font-sans text-xs text-accent mt-1">
-                {{ t('order.promo_invalid') }}
-              </p>
+              <!-- Blurred content underneath -->
+              <div class="pointer-events-none select-none">
+                <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
+                  {{ t('order.promo_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
+                </label>
+                <div class="flex gap-2 xl:flex-row flex-col">
+                  <input
+                    :placeholder="t('order.promo_placeholder')"
+                    class="flex-1 font-mono text-[15px] text-dark bg-white rounded-[10px] outline-none border-[1.5px] border-black/[0.12] uppercase tracking-[0.05em]"
+                    style="padding: 14px 16px;"
+                    disabled
+                  />
+                  <button
+                    type="button"
+                    disabled
+                    class="rounded-[10px] xl:py-0 py-4 xl:px-6 font-sans font-semibold text-sm border-none bg-black/[0.08] text-muted"
+                  >
+                    {{ t('order.promo_apply') }}
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <!-- File upload -->
-            <div class="mb-8">
+            <!-- File upload (temporarily disabled) -->
+            <!-- <div class="mb-8">
               <label class="block font-sans font-semibold text-sm text-dark mb-1.5">
                 {{ t('order.file_label') }} <span class="font-normal text-muted">{{ t('order.optional') }}</span>
               </label>
@@ -304,7 +303,7 @@ const inputStyle = 'padding: 14px 16px;'
                 <span class="text-xl">📎</span>
                 <span>{{ form.file ? form.file.name : t('order.file_placeholder') }}</span>
               </label>
-            </div>
+            </div> -->
 
             <!-- Submit -->
             <p v-if="submitError" class="font-sans text-sm text-red-500">

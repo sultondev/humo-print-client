@@ -329,6 +329,7 @@
     "qty_placeholder": "100",
     "qty_error": "Укажите количество",
     "date_label": "Желаемая дата",
+    "date_placeholder": "Выберите дату",
     "optional": "(необязательно)",
     "note_label": "Дополнительные пожелания",
     "note_placeholder": "О дизайне, размере или других деталях...",
@@ -367,6 +368,7 @@
         "val": "Пн–Пт: 9:00–18:00"
       }
     ],
+    "promo_coming_soon": "Скоро",
     "promo_label": "Промокод",
     "promo_placeholder": "Например: HUMO10",
     "promo_apply": "Применить",
